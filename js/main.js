@@ -1,5 +1,8 @@
 let allUsers = [];
 let filteredUsers = [];
+
+let num1 = 1
+let num2 = -1
 const getUsers = async function (url) {
   const response = await fetch(url);
   const user = await response.json();
@@ -15,8 +18,27 @@ const search = function (array) {
   cleanContainer();
   displayLists(filteredUsers);
   displayAddr(filteredUsers);
+
+  let sortBtn = document.querySelector(".sortBtn")
+  sortBtn.addEventListener("click",sort)
+  
 };
 
+const sort = function(){
+    let container = document.querySelector("#itemsList");
+
+    let itemsArr = Array.from(container.children)
+
+    itemsArr
+    .sort(function(a,b){
+        return a.innerText > b.innerText ? num1:num2
+    })
+    .map(list => container.append(list))
+
+    let tmp=num1
+    num1=num2
+    num2=tmp
+}
 const cleanContainer = function () {
   let container = document.getElementById("itemsList");
   container.innerHTML = "";
@@ -60,7 +82,7 @@ const displayAddr = function (arr) {
   for (let user of arr) {
     let addr = `${user.address.street}, ${user.address.suite}, ${user.address.city} (${user.address.zipcode})`;
     //console.log(addr);
-    let listArr = [...document.getElementsByClassName(".list-group-item"];
+    let listArr = [...document.getElementsByClassName(".list-group-item")];
   }
 };
 const generateList = function (obj, selected) {
