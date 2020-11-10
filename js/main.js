@@ -19,8 +19,8 @@ const search = function (array) {
   displayLists(filteredUsers);
   displayAddr(filteredUsers);
   mapMarkers(filteredUsers);
-  initMap(filteredUsers)
- 
+  initMap(filteredUsers);
+
   let sortBtn = document.querySelector(".sortBtn");
   sortBtn.addEventListener("click", sort);
 };
@@ -48,23 +48,19 @@ const searchInput = function () {
   return document.getElementById("searchBar").value.toLowerCase();
 };
 
-
-
 const filteredSearch = function (arr, selected) {
   let searchInput = document.getElementById("searchBar").value;
-  
-  
+
   filteredUsers = arr.filter((a) =>
     a[selected].toLowerCase().includes(searchInput)
   );
   window.localStorage.setItem("storedResult", JSON.stringify(filteredUsers));
- 
 };
 
 const displayLists = function (array) {
   let container = document.getElementById("itemsList");
   let select = selectedOption();
- 
+
   for (let user of array) {
     container.innerHTML += generateList(user, select);
   }
@@ -78,8 +74,7 @@ const displayAddr = function (arr) {
   }
 };
 const generateList = function (obj, selected) {
- 
-  return `<li id="${obj.id}" class="list-group-item "><a href="user.html?id=${obj.id}&lat=${obj.address.geo.lat}&lng=${obj.address.geo.lng}">${obj[selected]}</a></li>`;
+  return `<li id="${obj.id}" class="list-group-item"><a class="text-white" href="user.html?id=${obj.id}&lat=${obj.address.geo.lat}&lng=${obj.address.geo.lng}">${obj[selected]}</a></li>`;
 };
 
 const handleSelect = function (e) {
@@ -93,39 +88,31 @@ const selectedOption = function () {
   return select.options[select.selectedIndex].text.toLowerCase();
 };
 
-const mapMarkers = function(arr){
-    
-   arr.map(index => {
-        index.address.geo.lat = Number(index.address.geo.lat)
-        index.address.geo.lng = Number(index.address.geo.lng)
-    })
-
-    
-}
-
-
+const mapMarkers = function (arr) {
+  arr.map((index) => {
+    index.address.geo.lat = Number(index.address.geo.lat);
+    index.address.geo.lng = Number(index.address.geo.lng);
+  });
+};
 
 function initMap() {
-    const myLatLng = { lat: -37.3159, lng: 81.1496 };
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: myLatLng,
-    });
+  const myLatLng = { lat: -37.3159, lng: 81.1496 };
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 4,
+    center: myLatLng,
+  });
 
-    for(let user of filteredUsers){
-        new google.maps.Marker({
-            position: user.address.geo,
-            map,
-            title: "Hello World!",
-        });
-    }
-    
+  for (let user of filteredUsers) {
+    new google.maps.Marker({
+      position: user.address.geo,
+      map,
+      title: "Hello World!",
+    });
   }
-  
+}
+
 //
 
 window.onload = function () {
-
   getUsers("https://jsonplaceholder.typicode.com/users");
-  
 };
