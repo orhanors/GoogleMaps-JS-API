@@ -9,13 +9,13 @@ function initMap() {
       center: myLatLng,
     });
 
-    for(let user of filteredUsers){
-        new google.maps.Marker({
-            position: user.address.geo,
-            map,
-            title: "Hello World!",
-        });
-    }
+   
+    new google.maps.Marker({
+    	position:myLatLng,
+        map,
+        title: "Hello World!",
+    });
+
     
   }
 
