@@ -1,24 +1,19 @@
 function initMap() {
+  let urlParams = new URLSearchParams(window.location.search);
+  let myLat = urlParams.get("lat");
+  let myLng = urlParams.get("lng");
+  const myLatLng = { lat: Number(myLat), lng: Number(myLng) };
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 4,
+    center: myLatLng,
+  });
 
-	let urlParams = new URLSearchParams(window.location.search)
-	let myLat = urlParams.get("lat")
-	let myLng = urlParams.get("lng")
-    const myLatLng = { lat: Number(myLat), lng: Number(myLng) };
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: myLatLng,
-    });
-
-   
-    new google.maps.Marker({
-    	position:myLatLng,
-        map,
-        title: "Hello World!",
-    });
-
-    
-  }
-
+  new google.maps.Marker({
+    position: myLatLng,
+    map,
+    title: "Hello World!",
+  });
+}
 
 document.getElementsByClassName("terminal-window")[0].innerHTML = "";
 document.getElementsByClassName("header-intro")[0].innerHTML = "";
@@ -29,7 +24,7 @@ window.onload = function () {
   let userId = new URLSearchParams(document.location.search).get("id");
   let user = result.filter((r) => r.id === parseInt(userId))[0];
   //   console.log(user);
-  document.getElementsByTagName("h1")[0].innerText = user.name;
+  document.getElementsByTagName("h1")[0].innerText = `${user.name}`;
   document
     .querySelector(".fa-envelope")
     .parentElement.setAttribute("href", user.email);
@@ -60,7 +55,7 @@ window.onload = function () {
 	<p class="output-statement">${user.username}</p>
 	</div>`;
 
-	initMap()
+  initMap();
   //   document.getElementsByClassName(
   //     "output-statement"
   //   )[1].innerText = `${user[0].address.street}, ${user[0].address.suite}, ${user[0].address.city} (${user[0].address.zipcode})`;
