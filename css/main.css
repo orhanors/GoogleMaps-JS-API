@@ -249,3 +249,24 @@ ul li:hover{
     cursor: pointer;
     
 }
+
+
+
+
+#map {
+  height: 80%;
+  width: 70%;
+  margin-left: 10rem;
+  border: 10px solid gray;
+  border-radius: 5px;
+  margin-bottom: 10rem;
+  margin-top: 5rem;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+

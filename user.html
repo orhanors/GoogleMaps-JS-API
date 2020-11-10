@@ -4,6 +4,11 @@
     <title>Orhan Örs</title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVsIZDGOpPbws_BJqyBpegjKXgR4MLBGo&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
     <link
       href="https://fonts.googleapis.com/css?family=Nunito:300,400,500,600,700"
       rel="stylesheet"
@@ -17,6 +22,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="./css/user.css" />
+    
   </head>
 
   <body>
@@ -105,7 +111,8 @@
     <div class="project-title-container">
       <h1>More About <b>Orhan</b></h1>
     </div>
-
+    
+    <div id="map"></div>
     <div class="footer">
       <p>Made by Orhan Örs © 2020</p>
     </div>

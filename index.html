@@ -42,6 +42,12 @@
     crossorigin="anonymous"
   />
     <link rel="stylesheet" href="./css/main.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVsIZDGOpPbws_BJqyBpegjKXgR4MLBGo&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
 </head>
@@ -57,12 +63,12 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#searchField" class="nav-link"
-                                    >Jump</a
+                                    >Search</a
                                 >
                             </li>
                             <li class="nav-item">
-                                <a href="#card" class="nav-link"
-                                    >Card</a
+                                <a href="#map" class="nav-link"
+                                    >Map</a
                                 >
                             </li>
                             <li class="nav-item">
@@ -108,8 +114,12 @@
             <li class="list-group-item ">A</li> -->
           </ul>
       </section>
+      
+      
+      <div id="map"></div>
     
-    
+
+
     
     <script src="./js/main.js"></script>  
     <!-- Optional JavaScript -->

@@ -1,3 +1,25 @@
+function initMap() {
+
+	let urlParams = new URLSearchParams(window.location.search)
+	let myLat = urlParams.get("lat")
+	let myLng = urlParams.get("lng")
+    const myLatLng = { lat: Number(myLat), lng: Number(myLng) };
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 4,
+      center: myLatLng,
+    });
+
+    for(let user of filteredUsers){
+        new google.maps.Marker({
+            position: user.address.geo,
+            map,
+            title: "Hello World!",
+        });
+    }
+    
+  }
+
+
 document.getElementsByClassName("terminal-window")[0].innerHTML = "";
 document.getElementsByClassName("header-intro")[0].innerHTML = "";
 document.getElementsByClassName("project-title-container")[0].innerHTML = "";
@@ -38,6 +60,7 @@ window.onload = function () {
 	<p class="output-statement">${user.username}</p>
 	</div>`;
 
+	initMap()
   //   document.getElementsByClassName(
   //     "output-statement"
   //   )[1].innerText = `${user[0].address.street}, ${user[0].address.suite}, ${user[0].address.city} (${user[0].address.zipcode})`;

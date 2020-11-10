@@ -18,7 +18,9 @@ const search = function (array) {
   cleanContainer();
   displayLists(filteredUsers);
   displayAddr(filteredUsers);
-
+  mapMarkers(filteredUsers);
+  initMap(filteredUsers)
+ 
   let sortBtn = document.querySelector(".sortBtn");
   sortBtn.addEventListener("click", sort);
 };
@@ -46,33 +48,23 @@ const searchInput = function () {
   return document.getElementById("searchBar").value.toLowerCase();
 };
 
-// const filteredSearch = function (arr, selected) {
-//   let searchInput = document.getElementById("searchBar").value;
-//   console.log(arr);
-//   console.log(searchInput);
-//   filteredUsers = arr.filter((a) =>
-//     a[selected].includes(
-//       searchInput.substr(0, 1).toUpperCase() + searchInput.substr(1)
-//     )
-//   );
-//   console.log("filtered",filteredUsers)
-// };
+
 
 const filteredSearch = function (arr, selected) {
   let searchInput = document.getElementById("searchBar").value;
-  console.log(arr);
-  console.log(searchInput);
+  
+  
   filteredUsers = arr.filter((a) =>
     a[selected].toLowerCase().includes(searchInput)
   );
   window.localStorage.setItem("storedResult", JSON.stringify(filteredUsers));
-  console.log("filtered", filteredUsers);
+ 
 };
 
 const displayLists = function (array) {
   let container = document.getElementById("itemsList");
   let select = selectedOption();
-  console.log("nnnn", select);
+ 
   for (let user of array) {
     container.innerHTML += generateList(user, select);
   }
@@ -86,8 +78,8 @@ const displayAddr = function (arr) {
   }
 };
 const generateList = function (obj, selected) {
-  console.log("sss", obj[selected]);
-  return `<li id="${obj.id}" class="list-group-item "><a href="user.html?id=${obj.id}">${obj[selected]}</a></li>`;
+ 
+  return `<li id="${obj.id}" class="list-group-item "><a href="user.html?id=${obj.id}&lat=${obj.address.geo.lat}&lng=${obj.address.geo.lng}">${obj[selected]}</a></li>`;
 };
 
 const handleSelect = function (e) {
@@ -101,6 +93,39 @@ const selectedOption = function () {
   return select.options[select.selectedIndex].text.toLowerCase();
 };
 
+const mapMarkers = function(arr){
+    
+   arr.map(index => {
+        index.address.geo.lat = Number(index.address.geo.lat)
+        index.address.geo.lng = Number(index.address.geo.lng)
+    })
+
+    
+}
+
+
+
+function initMap() {
+    const myLatLng = { lat: -37.3159, lng: 81.1496 };
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 4,
+      center: myLatLng,
+    });
+
+    for(let user of filteredUsers){
+        new google.maps.Marker({
+            position: user.address.geo,
+            map,
+            title: "Hello World!",
+        });
+    }
+    
+  }
+  
+//
+
 window.onload = function () {
+
   getUsers("https://jsonplaceholder.typicode.com/users");
+  
 };
