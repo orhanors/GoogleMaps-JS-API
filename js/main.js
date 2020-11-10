@@ -1,8 +1,8 @@
 let allUsers = [];
 let filteredUsers = [];
 
-let num1 = 1
-let num2 = -1
+let num1 = 1;
+let num2 = -1;
 const getUsers = async function (url) {
   const response = await fetch(url);
   const user = await response.json();
@@ -19,26 +19,25 @@ const search = function (array) {
   displayLists(filteredUsers);
   displayAddr(filteredUsers);
 
-  let sortBtn = document.querySelector(".sortBtn")
-  sortBtn.addEventListener("click",sort)
-  
+  let sortBtn = document.querySelector(".sortBtn");
+  sortBtn.addEventListener("click", sort);
 };
 
-const sort = function(){
-    let container = document.querySelector("#itemsList");
+const sort = function () {
+  let container = document.querySelector("#itemsList");
 
-    let itemsArr = Array.from(container.children)
+  let itemsArr = Array.from(container.children);
 
-    itemsArr
-    .sort(function(a,b){
-        return a.innerText > b.innerText ? num1:num2
+  itemsArr
+    .sort(function (a, b) {
+      return a.innerText > b.innerText ? num1 : num2;
     })
-    .map(list => container.append(list))
+    .map((list) => container.append(list));
 
-    let tmp=num1
-    num1=num2
-    num2=tmp
-}
+  let tmp = num1;
+  num1 = num2;
+  num2 = tmp;
+};
 const cleanContainer = function () {
   let container = document.getElementById("itemsList");
   container.innerHTML = "";
@@ -66,6 +65,7 @@ const filteredSearch = function (arr, selected) {
   filteredUsers = arr.filter((a) =>
     a[selected].toLowerCase().includes(searchInput)
   );
+  window.localStorage.setItem("storedResult", JSON.stringify(filteredUsers));
   console.log("filtered", filteredUsers);
 };
 
@@ -87,7 +87,7 @@ const displayAddr = function (arr) {
 };
 const generateList = function (obj, selected) {
   console.log("sss", obj[selected]);
-  return `<li id="${obj.id}" class="list-group-item ">${obj[selected]}</li>`;
+  return `<li id="${obj.id}" class="list-group-item "><a href="user.html?id=${obj.id}">${obj[selected]}</a></li>`;
 };
 
 const handleSelect = function (e) {
