@@ -4,12 +4,17 @@ let filteredUsers = [];
 let num1 = 1;
 let num2 = -1;
 const getUsers = async function (url) {
-  const response = await fetch(url);
-  const user = await response.json();
-  allUsers = user;
-
-  let searchBar = document.getElementById("searchBar");
-  searchBar.addEventListener("keyup", (e) => handleSelect(e));
+    try{
+        const response = await fetch(url);
+        const user = await response.json();
+        allUsers = user;
+      
+        let searchBar = document.getElementById("searchBar");
+        searchBar.addEventListener("keyup", (e) => handleSelect(e));
+    }catch(err){
+        console.log(err)
+    }
+ 
 };
 
 const search = function (array) {
