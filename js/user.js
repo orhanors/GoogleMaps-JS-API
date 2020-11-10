@@ -24,14 +24,14 @@ window.onload = function () {
   let userId = new URLSearchParams(document.location.search).get("id");
   let user = result.filter((r) => r.id === parseInt(userId))[0];
   //   console.log(user);
-  document.getElementsByTagName("h1")[0].innerText = `${user.name}`;
+  document.getElementsByTagName("h1")[0].innerText = user.name;
   document
     .querySelector(".fa-envelope")
     .parentElement.setAttribute("href", user.email);
   document.getElementsByClassName("terminal-window")[0].innerHTML = `
 	<div class="statement">
 	<p class="input-statement">${user.name.split(" ")[0]}.age</p>
-	<p class="output-statement">user.</p>
+	<p class="output-statement">${user.name}</p>
 	</div>
 	<div class="statement">
 	<p class="input-statement">${user.name.split(" ")[0]}.location</p>
