@@ -1,5 +1,5 @@
 let allUsers = [];
-let filteredUsers = []
+let filteredUsers = [];
 const getUsers = async function (url) {
   const response = await fetch(url);
   const user = await response.json();
@@ -12,14 +12,15 @@ const getUsers = async function (url) {
 const search = function (array) {
   let selected = selectedOption();
   filteredSearch(array, selected);
-  cleanContainer()
-  displayLists(filteredUsers)
+  cleanContainer();
+  displayLists(filteredUsers);
+  displayAddr(filteredUsers);
 };
 
-const cleanContainer = function(){
-    let container = document.getElementById("itemsList")
-    container.innerHTML =""
-}
+const cleanContainer = function () {
+  let container = document.getElementById("itemsList");
+  container.innerHTML = "";
+};
 const searchInput = function () {
   return document.getElementById("searchBar").value.toLowerCase();
 };
@@ -37,30 +38,35 @@ const searchInput = function () {
 // };
 
 const filteredSearch = function (arr, selected) {
-    let searchInput = document.getElementById("searchBar").value;
-    console.log(arr);
-    console.log(searchInput);
-    filteredUsers = arr.filter((a) =>
-      a[selected].toLowerCase().includes(searchInput)
-    );
-    console.log("filtered",filteredUsers)
-  };
+  let searchInput = document.getElementById("searchBar").value;
+  console.log(arr);
+  console.log(searchInput);
+  filteredUsers = arr.filter((a) =>
+    a[selected].toLowerCase().includes(searchInput)
+  );
+  console.log("filtered", filteredUsers);
+};
 
-const displayLists = function(array){
-    let container = document.getElementById("itemsList")
-    let select = selectedOption()
-    console.log("nnnn",select)
-    for(let user of array){
-        container.innerHTML += generateList(user,select)
+const displayLists = function (array) {
+  let container = document.getElementById("itemsList");
+  let select = selectedOption();
+  console.log("nnnn", select);
+  for (let user of array) {
+    container.innerHTML += generateList(user, select);
+  }
+};
 
-    }
-
-
-}
-const generateList = function(obj,selected){
-    console.log("sss",obj[selected])
-    return `<li id="${obj.id}" class="list-group-item ">${obj[selected]}</li>`
-}
+const displayAddr = function (arr) {
+  for (let user of arr) {
+    let addr = `${user.address.street}, ${user.address.suite}, ${user.address.city} (${user.address.zipcode})`;
+    //console.log(addr);
+    let listArr = [...document.getElementsByClassName(".list-group-item"];
+  }
+};
+const generateList = function (obj, selected) {
+  console.log("sss", obj[selected]);
+  return `<li id="${obj.id}" class="list-group-item ">${obj[selected]}</li>`;
+};
 
 const handleSelect = function (e) {
   if (e.keyCode === 13) {
